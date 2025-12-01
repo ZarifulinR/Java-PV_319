@@ -12,4 +12,13 @@ void main() {
     Rect.height = scanner.nextDouble();
     Rect.Print();
     Rect.Area();
+    BankAccount Sergey = null;
+
+
+    BankAccount User = new BankAccount();
+
+    User.balance= scanner.nextDouble();
+    User.Deposit(10);
+    User.Withdraw(6);
+    User.PrintInfo();
 }
