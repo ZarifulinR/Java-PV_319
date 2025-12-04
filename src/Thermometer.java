@@ -6,6 +6,7 @@ public class Thermometer {
         return temp;
     }
 
+
     public void setTemp(double temp) {
         if (temp<=-50 || temp>50){
             System.out.println("\"Температура вне допустимого диапазона\"");
