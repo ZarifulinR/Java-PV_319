@@ -1,37 +1,40 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 void main() {
-    User Ivan = new User("Ivan",23);
-    User Fedor = new User("Fedor",23);
-    System.out.println(Ivan.equals(Fedor));
-    System.out.println(Ivan.toString());
-    System.out.println(Fedor.toString());
+    String text = "Рупа Рупи любит зелёный цвет, Рупа Рупи";
+    String[] words = text.toLowerCase().replaceAll("[^а-яa-z\\s]", "").split("\\s+");
+    Map<String, Integer> Count = new HashMap<>();
+    int c = 0;
+    for (String word : words) {
 
-    try {
-        Product TV = new Product("TV", 100);
-        System.out.println(TV);
-        Product PS= new Product("PS", -5);
-        System.out.println(PS);
+        Count.put(word, Count.getOrDefault(word, 0) + 1);
+        c++;
     }
-    catch (Exception e) {
-        System.out.println(e.getMessage());
+
+    System.out.println(c);
+    List<String> uniqueWords = new ArrayList<>(Count.keySet());
+    Collections.sort(uniqueWords);
+    for (String word : uniqueWords) {
+        System.out.println(word + " : " + Count.get(word));
     }
-    List<OrderItem> chek = new ArrayList<>();
-    chek.add(new OrderItem("Banana", 2, 150));
-    chek.add(new OrderItem("Aple", 4, 250));
-    chek.add(new OrderItem("Orange", 5, 500));
+    System.out.println(Count.size());
+    Storage<String> storage = new Storage<>();
+    storage.add("Хлеб");
+    storage.add("Молоко");
+    storage.add("Батон");
+    storage.add("Колбыса");
+    storage.add("Сыр");
+    storage.add("Ягер");
+    storage.add("Крупа");
 
-    double totalSum = chek.stream()
-            .mapToDouble(OrderItem::totalPrice)
-            .sum();
+    storage.remove("Ягер");
 
-    System.out.println("Общая стоимость: " + totalSum);
-
-    OrderItem maxItem = chek.stream()
-            .max(Comparator.comparingDouble(OrderItem::totalPrice))
-            .orElse(null);
-
-    System.out.println(maxItem);
-
-
+    HashMap<String, Integer> stats = storage.statistics();
+    for (Map.Entry<String, Integer> entry : stats.entrySet()) {
+        System.out.println(entry.getKey() + " : " + entry.getValue());
+    }
+    for (String stat : storage.getHistory()) {
+        System.out.println(stat);
+    }
 }
+
