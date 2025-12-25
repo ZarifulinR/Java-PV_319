@@ -1,40 +1,19 @@
 
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 void main() {
-    String text = "Рупа Рупи любит зелёный цвет, Рупа Рупи";
-    String[] words = text.toLowerCase().replaceAll("[^а-яa-z\\s]", "").split("\\s+");
-    Map<String, Integer> Count = new HashMap<>();
-    int c = 0;
-    for (String word : words) {
+    List<Integer> nums = List.of(1, 2, 3, 4, 5, 6);
+    List<Integer> even = nums.stream()
+            .filter(n->n%2==1)
+            .map(n->n*2)
+            .collect(Collectors.toList());
+        System.out.println(even);
+    List<String> words = List.of( "python","java", "go", "java", "rust", "go");
+    List<String> lang = words.stream()
+            .filter(s -> s.length()>3 )
+            .distinct()
+            .sorted()
+            .collect(Collectors.toList());
+    System.out.println(lang);
 
-        Count.put(word, Count.getOrDefault(word, 0) + 1);
-        c++;
-    }
-
-    System.out.println(c);
-    List<String> uniqueWords = new ArrayList<>(Count.keySet());
-    Collections.sort(uniqueWords);
-    for (String word : uniqueWords) {
-        System.out.println(word + " : " + Count.get(word));
-    }
-    System.out.println(Count.size());
-    Storage<String> storage = new Storage<>();
-    storage.add("Хлеб");
-    storage.add("Молоко");
-    storage.add("Батон");
-    storage.add("Колбыса");
-    storage.add("Сыр");
-    storage.add("Ягер");
-    storage.add("Крупа");
-
-    storage.remove("Ягер");
-
-    HashMap<String, Integer> stats = storage.statistics();
-    for (Map.Entry<String, Integer> entry : stats.entrySet()) {
-        System.out.println(entry.getKey() + " : " + entry.getValue());
-    }
-    for (String stat : storage.getHistory()) {
-        System.out.println(stat);
-    }
 }
 
