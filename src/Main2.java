@@ -30,7 +30,7 @@ void main() {
         int byteRead ;
         while ((byteRead = file1.read(buffer))!= -1){
             buffer.flip();
-
+            copy.write(buffer);
             System.out.println("Содержимое файла скопированно!");
             buffer.clear();
         }
